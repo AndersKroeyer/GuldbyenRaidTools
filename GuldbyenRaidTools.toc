@@ -1,4 +1,4 @@
-## Interface: 110150
+## Interface: 110200
 ## Title: Guldbyen Raid Tools
 ## Version: 0.0.1
 ## Author: Spillefeber, Jadefists, Fromeren
