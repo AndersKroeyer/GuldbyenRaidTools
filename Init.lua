@@ -10,11 +10,13 @@ f:RegisterEvent("PLAYER_LOGIN")
 
 f:SetScript("OnEvent", function(self, event, ...)
     if event == "RESURRECT_REQUEST" then
-        C_Timer.After(5, function()
-            if IsInRaid() and (UnitIsGroupLeader("player") or UnitIsGroupAssistant("player")) then
-                DoReadyCheck()
-            end
-        end)
+        if not in InCombatLockdown() then
+            C_Timer.After(5, function()
+                if not in InCombatLockdown() and IsInRaid() and (UnitIsGroupLeader("player") or UnitIsGroupAssistant("player")) then
+                    DoReadyCheck()
+                end
+            end)
+        end
     elseif event == "PLAYER_LOGIN" then
         print("Vi har loadet vores episke addon")
     end
