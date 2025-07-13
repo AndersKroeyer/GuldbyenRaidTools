@@ -6,6 +6,7 @@ end
 
 local f = CreateFrame("Frame")
 f:RegisterEvent("RESURRECT_REQUEST")
+f:RegisterEvent("PLAYER_LOGIN")
 
 f:SetScript("OnEvent", function(self, event, ...)
     if event == "RESURRECT_REQUEST" then
