@@ -1,0 +1,6 @@
+## Interface: 110150
+## Title: Guldbyen Raid Tools
+## Version: 0.0.1
+## Author: Spillefeber, Jadefists, Fromeren
+## SavedVariables: GBRT
+Init.lua
