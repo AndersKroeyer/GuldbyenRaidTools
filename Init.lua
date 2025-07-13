@@ -11,7 +11,7 @@ f:RegisterEvent("PLAYER_LOGIN")
 f:SetScript("OnEvent", function(self, event, ...)
     if event == "RESURRECT_REQUEST" then
         local inCombat = UnitAffectingCombat("player") or InCombatLockdown()
-        if not in inCombat then
+        if not inCombat then
             C_Timer.After(5, function()
                 if not inCombat and IsInRaid() and (UnitIsGroupLeader("player") or UnitIsGroupAssistant("player")) then
                     DoReadyCheck()
