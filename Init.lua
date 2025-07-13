@@ -5,12 +5,16 @@ if not GBRT then
 end
 
 local f = CreateFrame("Frame")
-f:RegisterEvent("ADDON_LOADED")
+f:RegisterEvent("RESURRECT_REQUEST")
 
-f:SetScript("OnEvent", function(self, ...)
-    help:EventHandler(e, ...)
+f:SetScript("OnEvent", function(self, event, ...)
+    if event == "RESURRECT_REQUEST" then
+        C_Timer.After(5, function()
+            if IsInRaid() and (UnitIsGroupLeader("player") or UnitIsGroupAssistant("player")) then
+                DoReadyCheck()
+            end
+        end)
+    elseif event == "PLAYER_LOGIN" then
+        print("Vi har loadet vores episke addon")
+    end
 end)
-
-function help:EventHandler(event, ...) {
-
-}
