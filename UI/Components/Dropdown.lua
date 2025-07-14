@@ -7,7 +7,7 @@ function GBI.Components:CreateDropdown(parent, config)
     local defaults = {
         width = 200,
         height = 20,
-        label = "Dropdown:",
+        label = "",
         options = {},
         selectedValue = nil,
         placeholder = "Select option...",

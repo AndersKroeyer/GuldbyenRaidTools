@@ -22,6 +22,7 @@
         "UIDropDownMenu_AddButton",
         "UIDropDownMenu_EnableDropDown",
         "UIDropDownMenu_DisableDropDown",
-        "UIDropDownMenu_CreateInfo"
+        "UIDropDownMenu_CreateInfo",
+        "SOUNDKIT"
     ]
 }

@@ -28,14 +28,14 @@ function GBI.UI:InitializeUI()
         title = "GBRT Main Panel"
     })
     panel:SetPoint("CENTER")
-    panel:Hide()
+    --panel:Hide()
     GBI.UI.MainPanel = panel
 
     local fetchButton = GBI.Components:CreateButton(panel, {
         name = "FetchButton",
         width = 200,
-        height = 30,
-        text = "Fetch MRT note",
+        height = 50,
+        text = "Fetch",
         onClick = function()
             local boss = GBRT.Settings["SelectedBoss"]
             local pulltimerEnabled = GBRT.Settings["AutoReadyCheck"] and "Enabled" or "Disabled"
@@ -43,7 +43,7 @@ function GBI.UI:InitializeUI()
         end
     })
     panel:AddComponent(fetchButton, "BOTTOMLEFT", "BOTTOMLEFT", 20, 20)
-    
+
     local checkbox = GBI.Components:CreateCheckbox(panel, {
         name = "AutoReadyCheckbox",
         text = "Ready on ressurection",
@@ -60,7 +60,7 @@ function GBI.UI:InitializeUI()
         {text = "Mug'zee", value = "mugzee"},
         {text = "Gally", value = "gally"}
     }
-    
+
     local dropdown = GBI.Components:CreateDropdown(panel, {
         name = "BossDropdown",
         options = dropdownOptions,
@@ -68,9 +68,7 @@ function GBI.UI:InitializeUI()
         onChange = function(selected)
             GBRT.Settings["SelectedBoss"] = selected
         end,
-        label = "Select Boss:",
-        placeholder = "Select the boss for which you want to fetch the note.",
-        tooltip = "Select the boss for which you want to fetch the note."
+        placeholder = "Select a boss",
     })
 
     panel:AddComponent(dropdown, "BOTTOMLEFT", "BOTTOMLEFT", 20, 80)
