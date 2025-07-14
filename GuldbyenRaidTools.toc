@@ -4,3 +4,7 @@
 ## Author: Spillefeber, Jadefists, Fromeren
 ## SavedVariables: GBRT
 Init.lua
+GuldbyenUI.lua
+NoteFetchDropdown.lua
+PulltimerCheckbox.lua
+SlashCommands.lua
