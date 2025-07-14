@@ -5,7 +5,18 @@
 ## SavedVariables: GBRT
 Init.lua
 EventHandler.lua
+
+# Main UI
 UI/Main.lua
 UI/FetchNote.lua
 UI/AutoReadyCheck.lua
+
+# Component registration
+UI/Components/Button.lua
+UI/Components/Panel.lua
+UI/Components/Checkbox.lua
+UI/Components/Dropdown.lua
+UI/Components/InputField.lua
+
+# Slash Commands
 SlashCommands.lua

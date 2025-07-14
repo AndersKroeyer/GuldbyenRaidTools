@@ -3,10 +3,10 @@ local _, GBI = ...
 -- Slash command to toggle the frame
 SLASH_GBUI1 = "/gbrt"
 SlashCmdList["GBUI"] = function(msg)
-    if GBI:IsShown() then
+    if GBI.UI:IsShown() then
         print("about to hide the frame")
-        GBI:Hide()
+        GBI.UI:Hide()
     else
-        GBI:Show()
+        GBI.UI:Show()
     end
 end

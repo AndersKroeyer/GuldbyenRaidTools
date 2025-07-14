@@ -1,61 +1,77 @@
 local _, GBI = ...
 
--- Create main UI frame
-local frame = CreateFrame("Frame", "GuldbyenUIFrame", UIParent, "BasicFrameTemplateWithInset")
-frame:SetSize(300, 200)
-frame:SetPoint("CENTER")
-frame:SetMovable(true)
-frame:EnableMouse(true)
-frame:RegisterForDrag("LeftButton")
-frame:SetScript("OnDragStart", frame.StartMoving)
-frame:SetScript("OnDragStop", frame.StopMovingOrSizing)
-frame.title = frame:CreateFontString(nil, "OVERLAY")
-frame.title:SetFontObject("GameFontHighlight")
-frame.title:SetPoint("LEFT", frame.TitleBg, "LEFT", 5, 0)
-frame.title:SetText("Guldbyen Raid Tools")
-
--- Hide frame initially
-frame:Hide()
-
-function GBI:GetFrame()
-    return frame
+if not GBI.Components then
+    GBI.Components = {}
 end
 
-function GBI:Hide()
-    frame:Hide()
+if not GBI.UI then
+    GBI.UI = {}
 end
 
-function GBI:Show()
-    frame:Show()
+function GBI.UI:Hide()
+    GBI.UI.MainPanel:Hide()
 end
 
-function GBI:IsShown()
-    return frame:IsShown()
+function GBI.UI:Show()
+    GBI.UI.MainPanel:Show()
 end
 
--- Create a button to show current values
-local button = CreateFrame("Button", "MyAddonButton", frame, "GameMenuButtonTemplate")
-button:SetSize(120, 30)
-button:SetPoint("TOPLEFT", frame, "BOTTOMLEFT", 15, 40)
-button:SetText("Fetch MRT note")
-button:SetScript("OnClick", function()
-    local boss = GBI.selectedBoss
-    local pulltimerEnabled = GBRT.Settings["AutoReadyCheck"] and "Enabled" or "Disabled"
-    print("Boss: " .. boss .. ", Checkbox: " .. pulltimerEnabled)
-end)
+function GBI.UI:IsShown()
+    return GBI.UI.MainPanel:IsShown()
+end
 
+function GBI.UI:InitializeUI()
+   local panel = GBI.Components:CreatePanel(UIParent, {
+        name = "GBRTMainPanel",
+        width = 400,
+        height = 300,
+        title = "GBRT Main Panel"
+    })
+    panel:SetPoint("CENTER")
+    panel:Hide()
+    GBI.UI.MainPanel = panel
 
-function GBI:InitializeUI()
-    if not GBI:GetFrame() then
-        print("Error: Main frame not found!")
-        return
-    end
+    local fetchButton = GBI.Components:CreateButton(panel, {
+        name = "FetchButton",
+        width = 200,
+        height = 30,
+        text = "Fetch MRT note",
+        onClick = function()
+            local boss = GBRT.Settings["SelectedBoss"]
+            local pulltimerEnabled = GBRT.Settings["AutoReadyCheck"] and "Enabled" or "Disabled"
+            print("Boss: " .. boss .. ", Checkbox: " .. pulltimerEnabled)
+        end
+    })
+    panel:AddComponent(fetchButton, "BOTTOMLEFT", "BOTTOMLEFT", 20, 20)
+    
+    local checkbox = GBI.Components:CreateCheckbox(panel, {
+        name = "AutoReadyCheckbox",
+        text = "Ready on ressurection",
+        checked = GBRT.Settings["AutoReadyCheck"],
+        onClick = function(self, checked)
+            GBRT.Settings["AutoReadyCheck"] = checked
+        end,
+        tooltip = "Automatically ready check when resurrected."
+    })
+    panel:AddComponent(checkbox, "TOPLEFT", "TOPLEFT", 15, -40)
 
-    -- Initialize dropdown and checkbox
-    if GBI.InitializeAutoReadyCheckUI then
-        GBI:InitializeAutoReadyCheckUI()
-    end
-    if GBI.InitializeFetchNoteUI then
-        GBI:InitializeFetchNoteUI()
-    end
+    local dropdownOptions = {
+        {text = "One armed bandit", value = "bandit"},
+        {text = "Mug'zee", value = "mugzee"},
+        {text = "Gally", value = "gally"}
+    }
+    
+    local dropdown = GBI.Components:CreateDropdown(panel, {
+        name = "BossDropdown",
+        options = dropdownOptions,
+        selectedValue = GBRT.Settings["SelectedBoss"],
+        onChange = function(selected)
+            GBRT.Settings["SelectedBoss"] = selected
+        end,
+        label = "Select Boss:",
+        placeholder = "Select the boss for which you want to fetch the note.",
+        tooltip = "Select the boss for which you want to fetch the note."
+    })
+
+    panel:AddComponent(dropdown, "BOTTOMLEFT", "BOTTOMLEFT", 20, 80)
 end
