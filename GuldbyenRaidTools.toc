@@ -8,3 +8,4 @@ GuldbyenUI.lua
 NoteFetchDropdown.lua
 PulltimerCheckbox.lua
 SlashCommands.lua
+EventHandler.lua
