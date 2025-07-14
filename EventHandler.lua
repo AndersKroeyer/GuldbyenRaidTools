@@ -18,6 +18,10 @@ f:SetScript("OnEvent", function(self, e, ...)
             end
 
             GBRT.Settings["AutoReadyCheck"] = GBRT.Settings["AutoReadyCheck"] or false
+
+            if GBI.InitializeUI then
+                GBI:InitializeUI()
+            end
         end
     elseif e == "PLAYER_LOGIN" then
         print("GuldbyenRaidTools er blevet loaded. Brug /gbrt for at tilgå brugergrænsefladen.")

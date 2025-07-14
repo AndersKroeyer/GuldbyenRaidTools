@@ -5,7 +5,7 @@
 ## SavedVariables: GBRT
 Init.lua
 EventHandler.lua
-GuldbyenUI.lua
-NoteFetchDropdown.lua
-AutoReadyCheckbox.lua
+UI/Main.lua
+UI/FetchNote.lua
+UI/AutoReadyCheck.lua
 SlashCommands.lua

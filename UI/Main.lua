@@ -44,17 +44,18 @@ button:SetScript("OnClick", function()
     print("Boss: " .. boss .. ", Checkbox: " .. pulltimerEnabled)
 end)
 
--- Event handling
-frame:RegisterEvent("ADDON_LOADED")
-frame:SetScript("OnEvent", function(self, event, arg1)
-    if event == "ADDON_LOADED" and arg1 == "GuldbyenRaidTools" then
-        print("GBRT loaded! Use /gbrt to open the interface.")
 
-        if GBI.InitializeDropdown then
-            GBI:InitializeDropdown()
-        end
-        if GBI.InitializeCheckbox then
-            GBI:InitializeCheckbox()
-        end
+function GBI:InitializeUI()
+    if not GBI:GetFrame() then
+        print("Error: Main frame not found!")
+        return
     end
-end)
+
+    -- Initialize dropdown and checkbox
+    if GBI.InitializeDropdown then
+        GBI:InitializeDropdown()
+    end
+    if GBI.InitializeCheckbox then
+        GBI:InitializeCheckbox()
+    end
+end
