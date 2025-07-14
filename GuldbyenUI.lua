@@ -40,7 +40,7 @@ button:SetPoint("TOPLEFT", frame, "BOTTOMLEFT", 15, 40)
 button:SetText("Fetch MRT note")
 button:SetScript("OnClick", function()
     local boss = GBI.selectedBoss
-    local pulltimerEnabled = GBI.readyOnRess and "Enabled" or "Disabled"
+    local pulltimerEnabled = GBRT.Settings["AutoReadyCheck"] and "Enabled" or "Disabled"
     print("Boss: " .. boss .. ", Checkbox: " .. pulltimerEnabled)
 end)
 

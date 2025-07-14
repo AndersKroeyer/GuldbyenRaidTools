@@ -1,9 +1,5 @@
 local _, GBI = ...
 
-if not GBRT then
-    GBRT = {}
-end
-
 -- Internal function to initialize the checkbox (called from main file)
 function GBI:InitializeCheckbox()
     if not GBI:GetFrame() then
@@ -18,12 +14,7 @@ function GBI:InitializeCheckbox()
     
     checkbox:SetScript("OnClick", function(self)
         -- Update global variable
-        GBI.readyOnRess = self:GetChecked() and true or false
-        
-        -- Call update function if it exists
-        if GBI.UpdateUI then
-            GBI:UpdateUI()
-        end
+        GBRT.Settings["AutoReadyCheck"] = self:GetChecked() and true or false
         
         -- Call any registered callback functions
         if GBI.OnCheckboxChanged then
@@ -32,7 +23,7 @@ function GBI:InitializeCheckbox()
     end)
     
     -- Set initial state
-    checkbox:SetChecked(GBRT.checkboxEnabled)
+    checkbox:SetChecked(GBRT.Settings["AutoReadyCheck"])
 end
 
 -- Internal function to programmatically set checkbox state

@@ -3,7 +3,7 @@ local _, GBI = ...
 local f = CreateFrame("Frame")
 f:RegisterEvent("RESURRECT_REQUEST")
 f:RegisterEvent("PLAYER_LOGIN")
-
+f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function(self, e, ...)
     if e == "ADDON_LOADED" then
         local name = ...
@@ -17,7 +17,7 @@ f:SetScript("OnEvent", function(self, e, ...)
                 GBRT.Settings = {}
             end
 
-            GBRT.Settings["AutoReadyCheck"] = GBRT.Settings["AutoReadyCheck"] or true
+            GBRT.Settings["AutoReadyCheck"] = GBRT.Settings["AutoReadyCheck"] or false
         end
     elseif e == "PLAYER_LOGIN" then
         print("GuldbyenRaidTools er blevet loaded. Brug /gbrt for at tilgå brugergrænsefladen.")
