@@ -11,7 +11,6 @@ function GBI.Components:CreateCheckbox(parent, config)
         font = "GameFontNormal",
         checked = false,
         onClick = nil,
-        tooltip = nil,
         textColor = {1, 1, 1, 1}, -- white
     }
 
@@ -37,18 +36,6 @@ function GBI.Components:CreateCheckbox(parent, config)
     if config.onClick then
         checkbox:SetScript("OnClick", function(self)
             config.onClick(self, self:GetChecked())
-        end)
-    end
-
-    -- Set up tooltip
-    if config.tooltip then
-        checkbox:SetScript("OnEnter", function(self)
-            GameTooltip:SetOwner(self, "ANCHOR_TOP")
-            GameTooltip:SetText(config.tooltip)
-            GameTooltip:Show()
-        end)
-        checkbox:SetScript("OnLeave", function(self)
-            GameTooltip:Hide()
         end)
     end
 

@@ -28,7 +28,7 @@ function GBI.UI:InitializeUI()
         title = "GBRT Main Panel"
     })
     panel:SetPoint("CENTER")
-    --panel:Hide()
+    panel:Hide()
     GBI.UI.MainPanel = panel
 
     local fetchButton = GBI.Components:CreateButton(panel, {
@@ -50,10 +50,19 @@ function GBI.UI:InitializeUI()
         checked = GBRT.Settings["AutoReadyCheck"],
         onClick = function(self, checked)
             GBRT.Settings["AutoReadyCheck"] = checked
-        end,
-        tooltip = "Automatically ready check when resurrected."
+        end
     })
     panel:AddComponent(checkbox, "TOPLEFT", "TOPLEFT", 15, -40)
+
+    local checkbox = GBI.Components:CreateCheckbox(panel, {
+        name = "ReadyCheckCheckbox",
+        text = "GBRT Ready Check",
+        checked = GBRT.Settings["ReadyCheck"],
+        onClick = function(self, checked)
+            GBRT.Settings["ReadyCheck"] = checked
+        end
+    })
+    panel:AddComponent(checkbox, "TOPLEFT", "TOPLEFT", 15, -70)
 
     local dropdownOptions = {
         {text = "One armed bandit", value = "bandit"},

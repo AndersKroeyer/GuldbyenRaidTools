@@ -19,6 +19,7 @@ f:SetScript("OnEvent", function(self, e, ...)
 
             GBRT.Settings["AutoReadyCheck"] = GBRT.Settings["AutoReadyCheck"] or false
             GBRT.Settings["SelectedBoss"] = GBRT.Settings["SelectedBoss"] or ""
+            GBRT.Settings["ReadyCheck"] = GBRT.Settings["ReadyCheck"] or false
 
             if GBI.UI.InitializeUI then
                 GBI.UI:InitializeUI()
