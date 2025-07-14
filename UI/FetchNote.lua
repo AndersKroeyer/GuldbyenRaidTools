@@ -8,14 +8,14 @@ local dropdownOptions = {
 }
 
 -- Function to initialize the dropdown (called from main file)
-function GBI:InitializeDropdown()
+function GBI:InitializeFetchNoteUI()
     if not GBI:GetFrame() then
         print("Error: Main frame not found!")
         return
     end
 
     -- Create dropdown menu
-    local dropdown = CreateFrame("Frame", "MyAddonDropdown", GBI:GetFrame(), "UIDropDownMenuTemplate")
+    local dropdown = CreateFrame("Frame", "FetchNoteDropdown", GBI:GetFrame(), "UIDropDownMenuTemplate")
     dropdown:SetPoint("TOPLEFT", GBI:GetFrame(), "BOTTOMLEFT", 0, 80)
     UIDropDownMenu_SetWidth(dropdown, 200)
     UIDropDownMenu_SetText(dropdown, "Select boss to fetch note for")

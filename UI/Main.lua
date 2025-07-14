@@ -52,10 +52,10 @@ function GBI:InitializeUI()
     end
 
     -- Initialize dropdown and checkbox
-    if GBI.InitializeDropdown then
-        GBI:InitializeDropdown()
+    if GBI.InitializeAutoReadyCheckUI then
+        GBI:InitializeAutoReadyCheckUI()
     end
-    if GBI.InitializeCheckbox then
-        GBI:InitializeCheckbox()
+    if GBI.InitializeFetchNoteUI then
+        GBI:InitializeFetchNoteUI()
     end
 end
