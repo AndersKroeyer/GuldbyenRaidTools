@@ -4,6 +4,7 @@ local f = CreateFrame("Frame")
 f:RegisterEvent("RESURRECT_REQUEST")
 f:RegisterEvent("PLAYER_LOGIN")
 f:RegisterEvent("ADDON_LOADED")
+f:RegisterEvent("READY_CHECK")
 f:SetScript("OnEvent", function(self, e, ...)
     if e == "ADDON_LOADED" then
         local name = ...
@@ -31,5 +32,11 @@ f:SetScript("OnEvent", function(self, e, ...)
         if GBRT.Settings["AutoReadyCheck"] then
             GBI:ReadyCheck()
         end
+    elseif e == "READY_CHECK" then
+        if GBRT.Settings["ReadyCheck"] then
+            C_Timer.After(1, function()
+            GBI:GBRTChecker()
+        end)
+    end
     end
 end)

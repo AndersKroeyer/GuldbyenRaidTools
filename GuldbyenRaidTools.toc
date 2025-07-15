@@ -4,6 +4,8 @@
 ## Author: Spillefeber, Jadefists, Fromeren
 ## SavedVariables: GBRT
 Init.lua
+ReadyCheck.lua
+GBRTChecker.lua
 EventHandler.lua
 
 # Main UI
