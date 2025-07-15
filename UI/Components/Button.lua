@@ -9,9 +9,8 @@ function GBI.Components:CreateButton(parent, config)
         height = 30,
         text = "Button",
         font = "GameFontNormal",
-        normalTexture = "Interface\\AddOns\\GuldbyenRaidTools\\Media\\panel-bg2.tga",
-        pushedTexture = "Interface\\Buttons\\UI-Panel-Button-Down",
-        highlightTexture = "Interface\\Buttons\\UI-Panel-Button-Highlight",
+        normalTexture = "Interface\\AddOns\\GuldbyenRaidTools\\Media\\button_highlight.tga",
+        pushedTexture = "Interface\\AddOns\\GuldbyenRaidTools\\Media\\button_pushed.tga",
         disabledTexture = "Interface\\Buttons\\UI-Panel-Button-Disabled",
         textColor = {1, 1, 1, 1}, -- white
         onClick = nil
@@ -26,11 +25,24 @@ function GBI.Components:CreateButton(parent, config)
         
     -- Set up button
     button:SetSize(config.width, config.height)
-    button:SetNormalTexture(config.normalTexture)
+
+    local bg = button:CreateTexture(nil, "BACKGROUND")
+    bg:SetAllPoints(button)
+    -- bg:SetColorTexture(0.8, 0.6, 0.2, 1)
+    bg:SetColorTexture(1, 1, 1, 1)
+    bg:SetGradient("HORIZONTAL", CreateColor(0.8, 0.6, 0.2, 1), CreateColor(1, 0.9, 0.6, 1)) 
+    button.bg = bg
+
+    -- Create border texture
+    -- local border = button:CreateTexture(nil, "BORDER")
+    -- border:SetAllPoints(button)
+    -- border:SetGradient("HORIZONTAL", CreateColor(0.8, 0.6, 0.2, 1), CreateColor(1, 0.9, 0.6, 1))
+    -- button.border = border
+
+    -- Custom textures
+    --button:SetNormalTexture(config.normalTexture)
     --button:SetPushedTexture(config.pushedTexture)
-    --button:SetHighlightTexture(config.highlightTexture)
     --button:SetDisabledTexture(config.disabledTexture)
-    button:SetText("test")
 
     -- Create text 
     local text = button:CreateFontString(nil, "OVERLAY")
@@ -47,15 +59,6 @@ function GBI.Components:CreateButton(parent, config)
     if config.onClick then
         button:SetScript("OnClick", config.onClick)
     end
-
-    -- Add methods to button
-    -- function button:SetButtonText(newText)
-    --     self.text:SetText(newText)
-    -- end
-
-    -- function button:GetButtonText()
-    --     return self.text:GetText()
-    -- end
 
     function button:SetEnabled(enabled)
         if enabled then

@@ -23,26 +23,14 @@ end
 function GBI.UI:InitializeUI()
    local panel = GBI.Components:CreatePanel(UIParent, {
         name = "GBRTMainPanel",
-        width = 400,
-        height = 300,
-        title = "GBRT Main Panel"
+        width = 500,
+        height = 400,
+        title = "Guldbyen Raid Tools",
+        draggable = true
     })
     panel:SetPoint("CENTER")
     panel:Hide()
     GBI.UI.MainPanel = panel
-
-    local fetchButton = GBI.Components:CreateButton(panel, {
-        name = "FetchButton",
-        width = 200,
-        height = 50,
-        text = "Fetch",
-        onClick = function()
-            local boss = GBRT.Settings["SelectedBoss"]
-            local pulltimerEnabled = GBRT.Settings["AutoReadyCheck"] and "Enabled" or "Disabled"
-            print("Boss: " .. boss .. ", Checkbox: " .. pulltimerEnabled)
-        end
-    })
-    panel:AddComponent(fetchButton, "BOTTOMLEFT", "BOTTOMLEFT", 20, 20)
 
     local checkbox = GBI.Components:CreateCheckbox(panel, {
         name = "AutoReadyCheckbox",
@@ -52,7 +40,7 @@ function GBI.UI:InitializeUI()
             GBRT.Settings["AutoReadyCheck"] = checked
         end
     })
-    panel:AddComponent(checkbox, "TOPLEFT", "TOPLEFT", 15, -40)
+    panel:AddComponent(checkbox, "TOPLEFT", "TOPLEFT", 20, -40)
 
     local checkbox = GBI.Components:CreateCheckbox(panel, {
         name = "ReadyCheckCheckbox",
@@ -62,7 +50,7 @@ function GBI.UI:InitializeUI()
             GBRT.Settings["ReadyCheck"] = checked
         end
     })
-    panel:AddComponent(checkbox, "TOPLEFT", "TOPLEFT", 15, -70)
+    panel:AddComponent(checkbox, "TOPLEFT", "TOPLEFT", 20, -80)
 
     local dropdownOptions = {
         {text = "One armed bandit", value = "bandit"},
@@ -79,6 +67,18 @@ function GBI.UI:InitializeUI()
         end,
         placeholder = "Select a boss",
     })
+    panel:AddComponent(dropdown, "BOTTOMLEFT", "BOTTOMLEFT", 15, 80)
 
-    panel:AddComponent(dropdown, "BOTTOMLEFT", "BOTTOMLEFT", 20, 80)
+    local fetchButton = GBI.Components:CreateButton(panel, {
+        name = "FetchButton",
+        width = 100,
+        height = 20,
+        text = "Fetch",
+        onClick = function()
+            local boss = GBRT.Settings["SelectedBoss"]
+            local pulltimerEnabled = GBRT.Settings["AutoReadyCheck"] and "Enabled" or "Disabled"
+            print("Boss: " .. boss .. ", Checkbox: " .. pulltimerEnabled)
+        end
+    })
+    panel:AddComponent(fetchButton, "BOTTOMLEFT", "BOTTOMLEFT", 20, 20)
 end
