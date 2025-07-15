@@ -85,7 +85,7 @@ function GBI.Components:CreateDropdown(parent, config)
     
     -- Create arrow
     local arrow = dropdownButton:CreateTexture(nil, "OVERLAY")
-    arrow:SetPoint("RIGHT", dropdownButton, "RIGHT", -8, 0)
+    arrow:SetPoint("RIGHT", dropdownButton, "RIGHT", -6, 0)
     arrow:SetSize(16, 16)
     arrow:SetTexture("Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Up")
 
