@@ -81,8 +81,7 @@ function GBI.UI:InitializeUI()
         text = "Update setup",
         onClick = function()
             local boss = GBRT.Settings["SelectedBoss"]
-            GBI:ImportNote(boss)
-            GBI:CreateBossSetup(boss)
+            GBI:SetupBoss(boss)
         end
     })
     panel:AddComponent(fetchButton, "BOTTOMLEFT", "BOTTOMLEFT", 20, 20)

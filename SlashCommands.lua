@@ -10,3 +10,9 @@ SlashCmdList["GBUI"] = function(msg)
         GBI.UI:Show()
     end
 end
+
+SLASH_GBSETUP1 = "/gbrt-setup"
+SlashCmdList["GBSETUP"] = function(msg)
+    local bossName = UnitName("target")
+    GBI:SetupFarmByBossId(bossName)
+end

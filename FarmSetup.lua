@@ -1,5 +1,33 @@
 local _, GBI = ...
 
+function GBI:SetupFarmByBossId(bossName)
+    if not IsValidScenario() or not bossName then
+       return
+    end
+
+    local bossMap = {
+        ["The Geargrinder"] = "vexie-and-the-geargrinders",
+        ["Flarendo"] = "cauldron-of-carnage",
+        ["Torq"] = "cauldron-of-carnage",
+        ["Rik Reverb"] = "rik-reverb",
+        ["Sprocketmonger Lockenstock"] = "sprocketmonger-lockenstock",
+        ["Stix Bunkjunker"] = "stix-bunkjunker",
+        ["One-Armed Bandit"] = "one-armed-bandit",
+        ["Mug'Zee"] = "mug-zee",
+        ["Chrome King Gallywix"] = "chrome-king-gallywix"
+    }
+
+    local setupId = bossMap[bossName]
+    if setupId then
+        GBI:SetupBoss(setupId)
+    end
+end
+
+function GBI:SetupBoss(boss)
+    GBI:ImportNote(boss)
+    GBI:CreateBossSetup(boss)
+end
+
 function GBI:ImportNote(boss)
     if not IsValidScenario() then
        return
@@ -16,8 +44,6 @@ function GBI:ImportNote(boss)
         print("MRT Note module not found or not loaded")
     end
 end
-
-
 
 function GBI:CreateBossSetup(boss)
     if not IsValidScenario() then
