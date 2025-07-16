@@ -7,6 +7,7 @@ Init.lua
 ReadyCheck.lua
 GBRTChecker.lua
 EventHandler.lua
+FarmSetup.lua
 
 # Main UI
 UI/Main.lua

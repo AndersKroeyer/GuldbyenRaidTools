@@ -53,9 +53,14 @@ function GBI.UI:InitializeUI()
     panel:AddComponent(checkbox, "TOPLEFT", "TOPLEFT", 20, -80)
 
     local dropdownOptions = {
-        {text = "One armed bandit", value = "bandit"},
-        {text = "Mug'zee", value = "mugzee"},
-        {text = "Gally", value = "gally"}
+        {text = "Vexie", value = "vexie-and-the-geargrinders"},
+        {text = "Cauldron", value = "cauldron-of-carnage"},
+        {text = "Rik", value = "rik-reverb"},
+        {text = "Stix", value = "stix-bunkjunker"},
+        {text = "Sprocket", value = "sprocketmonger-lockenstock"},
+        {text = "One armed bandit", value = "one-armed-bandit"},
+        {text = "Mug'zee", value = "mug-zee"},
+        {text = "Gally", value = "chrome-king-gallywix"}
     }
 
     local dropdown = GBI.Components:CreateDropdown(panel, {
@@ -73,11 +78,10 @@ function GBI.UI:InitializeUI()
         name = "FetchButton",
         width = 100,
         height = 20,
-        text = "Fetch",
+        text = "Update setup",
         onClick = function()
             local boss = GBRT.Settings["SelectedBoss"]
-            local pulltimerEnabled = GBRT.Settings["AutoReadyCheck"] and "Enabled" or "Disabled"
-            print("Boss: " .. boss .. ", Checkbox: " .. pulltimerEnabled)
+            GBI:CreateBossSetup(boss)
         end
     })
     panel:AddComponent(fetchButton, "BOTTOMLEFT", "BOTTOMLEFT", 20, 20)
