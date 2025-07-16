@@ -21,6 +21,8 @@ function GBI.UI:IsShown()
 end
 
 function GBI.UI:InitializeUI()
+   GBI.UI:InitializeMinimap()
+
    local panel = GBI.Components:CreatePanel(UIParent, {
         name = "GBRTMainPanel",
         width = 500,

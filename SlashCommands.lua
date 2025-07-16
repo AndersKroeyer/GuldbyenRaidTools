@@ -14,5 +14,5 @@ end
 SLASH_GBSETUP1 = "/gbrt-setup"
 SlashCmdList["GBSETUP"] = function(msg)
     local bossName = UnitName("target")
-    GBI:SetupFarmByBossId(bossName)
+    GBI:SetupFarmByBossUnitName(bossName)
 end

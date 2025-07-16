@@ -1,6 +1,6 @@
 local _, GBI = ...
 
-function GBI:SetupFarmByBossId(bossName)
+function GBI:SetupFarmByBossUnitName(bossName)
     if not IsValidScenario() or not bossName then
        return
     end
@@ -36,7 +36,7 @@ function GBI:ImportNote(boss)
     local bossSetup = GBRT.FarmSetup["bossSetups"][boss]
     local note = bossSetup.note
 
-    -- Update the main note text
+    -- Updates MRT note - this works dont touch it
     VMRT.Note.Text1 = note
     if GMRT and GMRT.A and GMRT.A.Note and GMRT.A.Note.frame then
         GMRT.A.Note.frame:Save()
@@ -52,13 +52,13 @@ function GBI:CreateBossSetup(boss)
 
     local bossSetup = GBRT.FarmSetup["bossSetups"][boss]
 
-    -- Move raiders out to bench groups (5-8)
+    -- Move raiders to bench groups (5-8)
     for i = 1, #bossSetup.raidersOut do
         local raiderOutCharacterName = NSAPI:GetChar(bossSetup.raidersOut[i])
         GBI:MoveToGroup(raiderOutCharacterName, "bench")
     end
 
-    -- Move raiders in to raid groups (1-4)
+    -- Move raiders to raid groups (1-4)
     for i = 1, #bossSetup.raidersIn do
         local raiderInCharacterName = NSAPI:GetChar(bossSetup.raidersIn[i])
         GBI:MoveToGroup(raiderInCharacterName, "raid")
@@ -110,9 +110,8 @@ function GBI:MoveToGroup(playerName, groupType)
     -- Attempt to move player to target group
     SetRaidSubgroup(index, targetGroup)
 
-    -- Wait a moment for the change to take effect
+    -- Validate if player was moved successfully
     -- C_Timer.After(0.5, function()
-    --     -- Verify the move was successful
     --     local newGroup = self:GetPlayerGroup(playerName)
     --     if newGroup == targetGroup then
     --         print("Successfully moved " .. playerName .. " to " .. groupType .. " group " .. targetGroup)

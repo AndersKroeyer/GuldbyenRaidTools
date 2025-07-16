@@ -3,14 +3,16 @@
 ## Version: 0.0.1
 ## Author: Spillefeber, Jadefists, Fromeren
 ## SavedVariables: GBRT
+## OptionalDeps: LibStub LibDataBroker-1.1 LibDBIcon-1.0
 Init.lua
 ReadyCheck.lua
 GBRTChecker.lua
-EventHandler.lua
 FarmSetup.lua
+EventHandler.lua
 
 # Main UI
 UI/Main.lua
+UI/Minimap.lua
 
 # Component registration
 UI/Components/Button.lua
