@@ -1,12 +1,29 @@
 local _, GBI = ...
 
+function GBI:ImportNote(boss)
+    if not IsValidScenario() then
+       return
+    end
+
+    local bossSetup = GBRT.FarmSetup["bossSetups"][boss]
+    local note = bossSetup.note
+
+    -- Update the main note text
+    VMRT.Note.Text1 = note
+    if GMRT and GMRT.A and GMRT.A.Note and GMRT.A.Note.frame then
+        GMRT.A.Note.frame:Save()
+    else
+        print("MRT Note module not found or not loaded")
+    end
+end
+
+
 
 function GBI:CreateBossSetup(boss)
     if not IsValidScenario() then
         return
     end
 
-    print("Creating boss setup for: " .. boss) -- prints vexie-and-the-geargrinders
     local bossSetup = GBRT.FarmSetup["bossSetups"][boss]
 
     -- Move raiders out to bench groups (5-8)
@@ -28,16 +45,16 @@ function GBI:MoveToGroup(playerName, groupType)
         --print("Player " .. playerName .. " is not in the raid")
         return false
     end
-    
+
     -- Get current group of the player
     local currentGroup, index = GBI:GetPlayerGroup(playerName)
     if not currentGroup or not index then
         --print("Could not determine current group for " .. playerName)
         return false
     end
-    
+
     --print("Player " .. playerName .. " is currently in group " .. currentGroup .. " and has index: " .. index)
-    
+
     -- Determine target group range based on type
     local minGroup, maxGroup
     if groupType == "bench" then
@@ -48,25 +65,25 @@ function GBI:MoveToGroup(playerName, groupType)
         print("Invalid group type: " .. groupType)
         return false
     end
-    
+
     -- Check if player is already in the correct group type
     if currentGroup >= minGroup and currentGroup <= maxGroup then
         --print("Player " .. playerName .. " is already in " .. groupType .. " group " .. currentGroup)
         return true
     end
-    
+
     -- Find an available group in the target range
     local targetGroup = self:FindAvailableGroup(minGroup, maxGroup)
     if not targetGroup then
         --print("No available " .. groupType .. " groups found")
         return false
     end
-    
+
     --print("Attempting to move " .. playerName .. " to " .. groupType .. " group " .. targetGroup)
-    
+
     -- Attempt to move player to target group
     SetRaidSubgroup(index, targetGroup)
-    
+
     -- Wait a moment for the change to take effect
     -- C_Timer.After(0.5, function()
     --     -- Verify the move was successful
@@ -77,7 +94,7 @@ function GBI:MoveToGroup(playerName, groupType)
     --         print("Failed to move " .. playerName .. " to " .. groupType .. " group. Current group: " .. (newGroup or "unknown"))
     --     end
     -- end)
-    
+
     return true
 end
 

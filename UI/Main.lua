@@ -81,6 +81,7 @@ function GBI.UI:InitializeUI()
         text = "Update setup",
         onClick = function()
             local boss = GBRT.Settings["SelectedBoss"]
+            GBI:ImportNote(boss)
             GBI:CreateBossSetup(boss)
         end
     })
