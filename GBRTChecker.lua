@@ -41,45 +41,43 @@ function GBI:CheckPlayerBuffs(unit)
 end
 
 function GBI:CheckRaidConsumables()
-    if IsValidScenario() then
-    local missingFlask = {}
-    local missingFood = {}
-    local raidSize = GetNumGroupMembers()
+    if GBI:IsValidScenario() then
+        local missingFlask = {}
+        local missingFood = {}
+        local raidSize = GetNumGroupMembers()
 
-    print("--- Checking consumables ---")
+        print("--- Checking consumables ---")
 
-    for i = 1, raidSize do
-        local unit = "raid" .. i
-        if UnitExists(unit) and not UnitIsDeadOrGhost(unit) then
-            local playerName = UnitName(unit)
-            local hasFlask, hasFood = self:CheckPlayerBuffs(unit)
+        for i = 1, raidSize do
+            local unit = "raid" .. i
+            if UnitExists(unit) and not UnitIsDeadOrGhost(unit) then
+                local playerName = UnitName(unit)
+                local hasFlask, hasFood = self:CheckPlayerBuffs(unit)
 
-            if not hasFlask then
-                table.insert(missingFlask, playerName)
-            end
+                if not hasFlask then
+                    table.insert(missingFlask, playerName)
+                end
 
-            if not hasFood then
-                table.insert(missingFood, playerName)
+                if not hasFood then
+                    table.insert(missingFood, playerName)
+                end
             end
         end
-    end
 
-    if #missingFlask > 0 then
-        print("Missing Flask: " .. table.concat(missingFlask, ", "))
-    else
-        print("All raid members have flask buffs!")
-    end
+        if #missingFlask > 0 then
+            print("Missing Flask: " .. table.concat(missingFlask, ", "))
+        else
+            print("All raid members have flask buffs!")
+        end
 
-    if #missingFood > 0 then
-        print("Missing Food: " .. table.concat(missingFood, ", "))
-        PlaySoundFile("Interface\\AddOns\\GuldbyenRaidTools\\Media\\my-tummy-feels-funny-peon.mp3")
-    else
-        print("All raid members have food buffs!")
-    end
-
+        if #missingFood > 0 then
+            print("Missing Food: " .. table.concat(missingFood, ", "))
+            PlaySoundFile("Interface\\AddOns\\GuldbyenRaidTools\\Media\\my-tummy-feels-funny-peon.mp3")
+        else
+            print("All raid members have food buffs!")
+        end
     end
 end
-
 
 function GBI:GBRTChecker()
     self:CheckRaidConsumables()

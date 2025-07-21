@@ -5,6 +5,7 @@
 ## SavedVariables: GBRT
 ## OptionalDeps: LibStub LibDataBroker-1.1 LibDBIcon-1.0
 Init.lua
+Utils.lua
 ReadyCheck.lua
 GBRTChecker.lua
 FarmSetup.lua

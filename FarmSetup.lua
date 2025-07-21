@@ -1,8 +1,8 @@
 local _, GBI = ...
 
 function GBI:SetupFarmByBossUnitName(bossName)
-    if not IsValidScenario() or not bossName then
-       return
+    if not GBI:IsValidScenario() or not bossName then
+        return
     end
 
     local bossMap = {
@@ -29,8 +29,8 @@ function GBI:SetupBoss(boss)
 end
 
 function GBI:ImportNote(boss)
-    if not IsValidScenario() then
-       return
+    if not GBI:IsValidScenario() then
+        return
     end
 
     local bossSetup = GBRT.FarmSetup["bossSetups"][boss]
@@ -46,7 +46,8 @@ function GBI:ImportNote(boss)
 end
 
 function GBI:CreateBossSetup(boss)
-    if not IsValidScenario() then
+    if not GBI:IsValidScenario() then
+        print("Not valid scenario")
         return
     end
 
@@ -54,13 +55,13 @@ function GBI:CreateBossSetup(boss)
 
     -- Move raiders to bench groups (5-8)
     for i = 1, #bossSetup.raidersOut do
-        local raiderOutCharacterName = NSAPI:GetChar(bossSetup.raidersOut[i])
+        local raiderOutCharacterName = NSAPI:GetChar(bossSetup.raidersOut[i], true)
         GBI:MoveToGroup(raiderOutCharacterName, "bench")
     end
 
     -- Move raiders to raid groups (1-4)
     for i = 1, #bossSetup.raidersIn do
-        local raiderInCharacterName = NSAPI:GetChar(bossSetup.raidersIn[i])
+        local raiderInCharacterName = NSAPI:GetChar(bossSetup.raidersIn[i], true)
         GBI:MoveToGroup(raiderInCharacterName, "raid")
     end
 end
@@ -68,14 +69,13 @@ end
 function GBI:MoveToGroup(playerName, groupType)
     -- Check if player exists in raid
     if not UnitInRaid(playerName) then
-        --print("Player " .. playerName .. " is not in the raid")
         return false
     end
 
     -- Get current group of the player
     local currentGroup, index = GBI:GetPlayerGroup(playerName)
     if not currentGroup or not index then
-        --print("Could not determine current group for " .. playerName)
+        print("Could not determine current group for " .. playerName)
         return false
     end
 
@@ -88,7 +88,7 @@ function GBI:MoveToGroup(playerName, groupType)
     elseif groupType == "raid" then
         minGroup, maxGroup = 1, 4
     else
-        print("Invalid group type: " .. groupType)
+        --print("Invalid group type: " .. groupType)
         return false
     end
 
@@ -105,7 +105,7 @@ function GBI:MoveToGroup(playerName, groupType)
         return false
     end
 
-    --print("Attempting to move " .. playerName .. " to " .. groupType .. " group " .. targetGroup)
+    print("Attempting to move " .. playerName .. " to " .. groupType .. " group " .. targetGroup)
 
     -- Attempt to move player to target group
     SetRaidSubgroup(index, targetGroup)
@@ -125,9 +125,13 @@ end
 
 -- Helper function to get a player's current group
 function GBI:GetPlayerGroup(playerName)
+    local normalizedPlayerName = Ambiguate(playerName, "short") -- Strips realm if present
+
     for i = 1, GetNumGroupMembers() do
         local name, rank, subgroup = GetRaidRosterInfo(i)
-        if name == playerName then
+        local normalizedName = Ambiguate(name, "short")
+
+        if normalizedName == normalizedPlayerName then
             return subgroup, i
         end
     end
@@ -136,7 +140,7 @@ end
 
 -- Helper function to find an available group in a specified range
 function GBI:FindAvailableGroup(minGroup, maxGroup)
-    local groupCounts = {0, 0, 0, 0, 0, 0, 0, 0} -- Groups 1-8
+    local groupCounts = { 0, 0, 0, 0, 0, 0, 0, 0 } -- Groups 1-8
 
     -- Count players in each group
     for i = 1, GetNumGroupMembers() do
