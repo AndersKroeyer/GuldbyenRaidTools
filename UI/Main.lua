@@ -21,9 +21,9 @@ function GBI.UI:IsShown()
 end
 
 function GBI.UI:InitializeUI()
-   GBI.UI:InitializeMinimap()
+    GBI.UI:InitializeMinimap()
 
-   local panel = GBI.Components:CreatePanel(UIParent, {
+    local panel = GBI.Components:CreatePanel(UIParent, {
         name = "GBRTMainPanel",
         width = 500,
         height = 400,
@@ -34,20 +34,74 @@ function GBI.UI:InitializeUI()
     --panel:Hide()
     GBI.UI.MainPanel = panel
 
-    GBI.Components:CreateSettingCheckbox(panel, "AutoReadyCheckbox", "Ready on ressurection", "AutoReadyCheck", 20, -40, "TOPLEFT", "TOPLEFT")
-    GBI.Components:CreateSettingCheckbox(panel, "ReadyCheckCheckbox", "GBRT Ready Check", "ReadyCheck", 20, -80, "TOPLEFT", "TOPLEFT")
+    GBI.Components:CreateIcon(panel, {
+        name = "CloseIcon",
+        offsetX = 0,
+        offsetY = 0,
+        point = "TOPRIGHT",
+        relativePoint = "TOPRIGHT",
+        texture = "Interface\\AddOns\\GuldbyenRaidTools\\Media\\close.tga",
+        tooltip = "Close",
+        onClick = function()
+            GBI.UI:Hide()
+        end
+    })
 
+    GBI.Components:CreateSettingCheckbox(panel, {
+        name = "AutoReadyCheckbox",
+        text = "Ready on ressurection",
+        settingKey = "AutoReadyCheck",
+        offsetX = 20,
+        offsetY = -40,
+        point = "TOPLEFT",
+        relativePoint = "TOPLEFT"
+    })
+
+    GBI.Components:CreateSettingCheckbox(panel, {
+        name = "ReadyCheckCheckbox",
+        text = "GBRT Ready Check",
+        settingKey = "ReadyCheck",
+        offsetX = 20,
+        offsetY = -80,
+        point = "TOPLEFT",
+        relativePoint = "TOPLEFT"
+    })
+
+    -- Dropdown for boss selection
     local dropdownOptions = {
-        {text = "Vexie", value = "vexie-and-the-geargrinders"},
-        {text = "Cauldron", value = "cauldron-of-carnage"},
-        {text = "Rik", value = "rik-reverb"},
-        {text = "Stix", value = "stix-bunkjunker"},
-        {text = "Sprocket", value = "sprocketmonger-lockenstock"},
-        {text = "One armed bandit", value = "one-armed-bandit"},
-        {text = "Mug'zee", value = "mug-zee"},
-        {text = "Gally", value = "chrome-king-gallywix"}
+        { text = "Vexie",            value = "vexie-and-the-geargrinders" },
+        { text = "Cauldron",         value = "cauldron-of-carnage" },
+        { text = "Rik",              value = "rik-reverb" },
+        { text = "Stix",             value = "stix-bunkjunker" },
+        { text = "Sprocket",         value = "sprocketmonger-lockenstock" },
+        { text = "One armed bandit", value = "one-armed-bandit" },
+        { text = "Mug'zee",          value = "mug-zee" },
+        { text = "Gally",            value = "chrome-king-gallywix" }
     }
-    GBI.Components:CreateDropdown(panel, "BossPicker", dropdownOptions, "SelectedBoss", 15, 80, "BOTTOMLEFT", "BOTTOMLEFT")
+    GBI.Components:CreateDropdown(panel, {
+        name = "BossPicker",
+        options = dropdownOptions,
+        selectedValue = GBRT.Settings["SelectedBoss"],
+        onChange = function(selected)
+            GBRT.Settings["SelectedBoss"] = selected
+        end,
+        point = "BOTTOMLEFT",
+        relativePoint = "BOTTOMLEFT",
+        offsetX = 15,
+        offsetY = 80
+    })
 
-    GBI.Components:CreateButton(panel, "FetchButton", "Update setup", "SelectedBoss", 20, 20, "BOTTOMLEFT", "BOTTOMLEFT")
+    -- Update MRT note and raid groups button
+    GBI.Components:CreateButton(panel, {
+        name = "FetchButton",
+        text = "Update setup",
+        onClick = function()
+            local boss = GBRT.Settings["SelectedBoss"]
+            GBI:SetupBoss(boss)
+        end,
+        offsetX = 20,
+        offsetY = 20,
+        point = "BOTTOMLEFT",
+        relativePoint = "BOTTOMLEFT"
+    })
 end

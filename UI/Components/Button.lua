@@ -30,7 +30,8 @@ local function CreateButtonComponent(parent, config)
     bg:SetAllPoints(button)
     -- bg:SetColorTexture(0.8, 0.6, 0.2, 1)
     bg:SetColorTexture(1, 1, 1, 1)
-    bg:SetGradient("HORIZONTAL", CreateColor(0.8, 0.6, 0.2, 1), CreateColor(1, 0.9, 0.6, 1)) 
+    bg:SetGradient("HORIZONTAL", CreateColor(0.8, 0.6, 0.2, 1), CreateColor(1, 0.7, 0.4, 1))
+
     button.bg = bg
 
     -- Create border texture
@@ -71,16 +72,13 @@ local function CreateButtonComponent(parent, config)
     return button
 end
 
-function GBI.Components:CreateButton(panel, name, text, settingKey, offsetX, offsetY, point, relativePoint)
-    local fetchButton = CreateButtonComponent(panel, {
-        name = name,
-        width = 100,
-        height = 20,
-        text = text,
-        onClick = function()
-            local boss = GBRT.Settings[settingKey]
-            GBI:SetupBoss(boss)
-        end
+function GBI.Components:CreateButton(panel, config)
+    local button = CreateButtonComponent(panel, {
+        name = config.name,
+        width = config.width or 100,
+        height = config.height or 20,
+        text = config.text,
+        onClick = config.onClick
     })
-    panel:AddComponent(fetchButton, point, relativePoint, offsetX, offsetY)
+    panel:AddComponent(button, config.point, config.relativePoint, config.offsetX, config.offsetY)
 end

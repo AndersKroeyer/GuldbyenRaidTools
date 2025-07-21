@@ -69,14 +69,27 @@ local function CreateCheckboxComponent(parent, config)
     return checkbox
 end
 
-function GBI.Components:CreateSettingCheckbox(panel, name, text, settingKey, offsetX, offsetY, point, relativePoint)
+function GBI.Components:CreateCheckbox(panel, config)
     local checkbox = CreateCheckboxComponent(panel, {
-        name = name,
-        text = text,
-        checked = GBRT.Settings[settingKey],
-        onClick = function(self, checked)
-            GBRT.Settings[settingKey] = checked
-        end
+        name = config.name,
+        text = config.text,
+        checked = config.checked,
+        onClick = config.onClick
     })
-    panel:AddComponent(checkbox, point, relativePoint, offsetX, offsetY)
+    panel:AddComponent(checkbox, config.point, config.relativePoint, config.offsetX, config.offsetY)
+end
+
+function GBI.Components:CreateSettingCheckbox(panel, config)
+   self:CreateCheckbox(panel, {
+        name = config.name,
+        text = config.text,
+        checked = GBRT.Settings[config.settingKey],
+        onClick = function(self, checked)
+            GBRT.Settings[config.settingKey] = checked
+        end,
+        offsetX = config.offsetX,
+        offsetY = config.offsetY,
+        point = config.point,
+        relativePoint = config.relativePoint
+    })
 end

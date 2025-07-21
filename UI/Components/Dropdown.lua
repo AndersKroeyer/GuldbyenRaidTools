@@ -353,14 +353,12 @@ local function CreateDropdownComponent(parent, config)
     return container
 end
 
-function GBI.Components:CreateDropdown(panel, name, options, settingKey, offsetX, offsetY, point, relativePoint)
+function GBI.Components:CreateDropdown(panel, config)
     local dropdown = CreateDropdownComponent(panel, {
-        name = name,
-        options = options,
-        selectedValue = GBRT.Settings[settingKey],
-        onChange = function(selected)
-            GBRT.Settings[settingKey] = selected
-        end
+        name = config.name,
+        options = config.options,
+        selectedValue = config.selectedValue,
+        onChange = config.onChange
     })
-    panel:AddComponent(dropdown, point, relativePoint, offsetX, offsetY)
+    panel:AddComponent(dropdown, config.point, config.relativePoint, config.offsetX, config.offsetY)
 end
