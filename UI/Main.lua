@@ -31,7 +31,7 @@ function GBI.UI:InitializeUI()
         draggable = true
     })
     panel:SetPoint("CENTER")
-    --panel:Hide()
+    panel:Hide()
     GBI.UI.MainPanel = panel
 
     GBI.Components:CreateIcon(panel, {
