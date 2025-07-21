@@ -19,7 +19,6 @@ UI/Components/Button.lua
 UI/Components/Panel.lua
 UI/Components/Checkbox.lua
 UI/Components/Dropdown.lua
-UI/Components/InputField.lua
 UI/Components/Icon.lua
 
 # Assets
