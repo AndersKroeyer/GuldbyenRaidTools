@@ -1,6 +1,6 @@
 local _, GBI = ...
 
-function GBI.Components:CreateDropdown(parent, config)
+local function CreateDropdownComponent(parent, config)
     local container = CreateFrame("Frame", config.name .. "Container", parent)
     
     -- Default configuration
@@ -351,4 +351,16 @@ function GBI.Components:CreateDropdown(parent, config)
     container.arrow = arrow
 
     return container
+end
+
+function GBI.Components:CreateDropdown(panel, name, options, settingKey, offsetX, offsetY, point, relativePoint)
+    local dropdown = CreateDropdownComponent(panel, {
+        name = name,
+        options = options,
+        selectedValue = GBRT.Settings[settingKey],
+        onChange = function(selected)
+            GBRT.Settings[settingKey] = selected
+        end
+    })
+    panel:AddComponent(dropdown, point, relativePoint, offsetX, offsetY)
 end

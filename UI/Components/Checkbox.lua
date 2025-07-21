@@ -1,6 +1,6 @@
 local _, GBI = ...
 
-function GBI.Components:CreateCheckbox(parent, config)
+local function CreateCheckboxComponent(parent, config)
     local checkbox = CreateFrame("CheckButton", config.name, parent)
 
     -- Default configuration
@@ -67,4 +67,16 @@ function GBI.Components:CreateCheckbox(parent, config)
     end
 
     return checkbox
+end
+
+function GBI.Components:CreateSettingCheckbox(panel, name, text, settingKey, offsetX, offsetY, point, relativePoint)
+    local checkbox = CreateCheckboxComponent(panel, {
+        name = name,
+        text = text,
+        checked = GBRT.Settings[settingKey],
+        onClick = function(self, checked)
+            GBRT.Settings[settingKey] = checked
+        end
+    })
+    panel:AddComponent(checkbox, point, relativePoint, offsetX, offsetY)
 end

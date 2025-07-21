@@ -31,28 +31,11 @@ function GBI.UI:InitializeUI()
         draggable = true
     })
     panel:SetPoint("CENTER")
-    panel:Hide()
+    --panel:Hide()
     GBI.UI.MainPanel = panel
 
-    local checkbox = GBI.Components:CreateCheckbox(panel, {
-        name = "AutoReadyCheckbox",
-        text = "Ready on ressurection",
-        checked = GBRT.Settings["AutoReadyCheck"],
-        onClick = function(self, checked)
-            GBRT.Settings["AutoReadyCheck"] = checked
-        end
-    })
-    panel:AddComponent(checkbox, "TOPLEFT", "TOPLEFT", 20, -40)
-
-    local checkbox = GBI.Components:CreateCheckbox(panel, {
-        name = "ReadyCheckCheckbox",
-        text = "GBRT Ready Check",
-        checked = GBRT.Settings["ReadyCheck"],
-        onClick = function(self, checked)
-            GBRT.Settings["ReadyCheck"] = checked
-        end
-    })
-    panel:AddComponent(checkbox, "TOPLEFT", "TOPLEFT", 20, -80)
+    GBI.Components:CreateSettingCheckbox(panel, "AutoReadyCheckbox", "Ready on ressurection", "AutoReadyCheck", 20, -40, "TOPLEFT", "TOPLEFT")
+    GBI.Components:CreateSettingCheckbox(panel, "ReadyCheckCheckbox", "GBRT Ready Check", "ReadyCheck", 20, -80, "TOPLEFT", "TOPLEFT")
 
     local dropdownOptions = {
         {text = "Vexie", value = "vexie-and-the-geargrinders"},
@@ -64,27 +47,7 @@ function GBI.UI:InitializeUI()
         {text = "Mug'zee", value = "mug-zee"},
         {text = "Gally", value = "chrome-king-gallywix"}
     }
+    GBI.Components:CreateDropdown(panel, "BossPicker", dropdownOptions, "SelectedBoss", 15, 80, "BOTTOMLEFT", "BOTTOMLEFT")
 
-    local dropdown = GBI.Components:CreateDropdown(panel, {
-        name = "BossDropdown",
-        options = dropdownOptions,
-        selectedValue = GBRT.Settings["SelectedBoss"],
-        onChange = function(selected)
-            GBRT.Settings["SelectedBoss"] = selected
-        end,
-        placeholder = "Select a boss",
-    })
-    panel:AddComponent(dropdown, "BOTTOMLEFT", "BOTTOMLEFT", 15, 80)
-
-    local fetchButton = GBI.Components:CreateButton(panel, {
-        name = "FetchButton",
-        width = 100,
-        height = 20,
-        text = "Update setup",
-        onClick = function()
-            local boss = GBRT.Settings["SelectedBoss"]
-            GBI:SetupBoss(boss)
-        end
-    })
-    panel:AddComponent(fetchButton, "BOTTOMLEFT", "BOTTOMLEFT", 20, 20)
+    GBI.Components:CreateButton(panel, "FetchButton", "Update setup", "SelectedBoss", 20, 20, "BOTTOMLEFT", "BOTTOMLEFT")
 end

@@ -1,6 +1,6 @@
 local _, GBI = ...
 
-function GBI.Components:CreateButton(parent, config)
+local function CreateButtonComponent(parent, config)
     local button = CreateFrame("Button", config.name, parent)
 
     -- Default configuration
@@ -69,4 +69,18 @@ function GBI.Components:CreateButton(parent, config)
     end
 
     return button
+end
+
+function GBI.Components:CreateButton(panel, name, text, settingKey, offsetX, offsetY, point, relativePoint)
+    local fetchButton = CreateButtonComponent(panel, {
+        name = name,
+        width = 100,
+        height = 20,
+        text = text,
+        onClick = function()
+            local boss = GBRT.Settings[settingKey]
+            GBI:SetupBoss(boss)
+        end
+    })
+    panel:AddComponent(fetchButton, point, relativePoint, offsetX, offsetY)
 end
