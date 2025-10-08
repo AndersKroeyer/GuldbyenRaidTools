@@ -67,19 +67,6 @@ function GBI.UI:InitializeUI()
         relativePoint = "TOPLEFT"
     })
 
-   local bossMap = {
-        ["Plexus Sentinel"] = "plexus-sentinel",
-        ["Loom'ithar"] = "loomithar",
-        ["Soulbinder Naazindhri"] = "soulbinder-naazindhri",
-        ["Forgeweaver Araz"] = "forgeweaver-araz",
-        ["Adarus Duskblaze"] = "the-soul-hunters",
-        ["Velaryn Bloodwrath"] = "the-soul-hunters",
-        ["Ilyssa Darksorrow"] = "the-soul-hunters",
-        ["Fractillus"] = "fractillus",
-        ["Nexus-King Salhadaar"] = "nexus-king-salhadaar",
-        ["Dimensius"] = "dimensius-the-all-devouring"
-    }
-
     -- Dropdown for boss selection
     local dropdownOptions = {
         { text = "Plexus Sentinel", value = "plexus-sentinel" },
