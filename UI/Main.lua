@@ -67,16 +67,29 @@ function GBI.UI:InitializeUI()
         relativePoint = "TOPLEFT"
     })
 
+   local bossMap = {
+        ["Plexus Sentinel"] = "plexus-sentinel",
+        ["Loom'ithar"] = "loomithar",
+        ["Soulbinder Naazindhri"] = "soulbinder-naazindhri",
+        ["Forgeweaver Araz"] = "forgeweaver-araz",
+        ["Adarus Duskblaze"] = "the-soul-hunters",
+        ["Velaryn Bloodwrath"] = "the-soul-hunters",
+        ["Ilyssa Darksorrow"] = "the-soul-hunters",
+        ["Fractillus"] = "fractillus",
+        ["Nexus-King Salhadaar"] = "nexus-king-salhadaar",
+        ["Dimensius"] = "dimensius-the-all-devouring"
+    }
+
     -- Dropdown for boss selection
     local dropdownOptions = {
-        { text = "Vexie",            value = "vexie-and-the-geargrinders" },
-        { text = "Cauldron",         value = "cauldron-of-carnage" },
-        { text = "Rik",              value = "rik-reverb" },
-        { text = "Stix",             value = "stix-bunkjunker" },
-        { text = "Sprocket",         value = "sprocketmonger-lockenstock" },
-        { text = "One armed bandit", value = "one-armed-bandit" },
-        { text = "Mug'zee",          value = "mug-zee" },
-        { text = "Gally",            value = "chrome-king-gallywix" }
+        { text = "Plexus Sentinel", value = "plexus-sentinel" },
+        { text = "Loomithar",       value = "loomithar" },
+        { text = "Soulbinder",      value = "soulbinder-naazindhri" },
+        { text = "Forgeweaver",     value = "forgeweaver-araz" },
+        { text = "Soul Hunters",    value = "the-soul-hunters" },
+        { text = "Fractillus",      value = "fractillus" },
+        { text = "Nexus King",      value = "nexus-king-salhadaar" },
+        { text = "Dimy",            value = "dimensius-the-all-devouring" }
     }
     GBI.Components:CreateDropdown(panel, {
         name = "BossPicker",
