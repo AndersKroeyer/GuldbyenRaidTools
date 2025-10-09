@@ -6,15 +6,16 @@ function GBI:SetupFarmByBossUnitName(bossName)
     end
 
     local bossMap = {
-        ["The Geargrinder"] = "vexie-and-the-geargrinders",
-        ["Flarendo"] = "cauldron-of-carnage",
-        ["Torq"] = "cauldron-of-carnage",
-        ["Rik Reverb"] = "rik-reverb",
-        ["Sprocketmonger Lockenstock"] = "sprocketmonger-lockenstock",
-        ["Stix Bunkjunker"] = "stix-bunkjunker",
-        ["One-Armed Bandit"] = "one-armed-bandit",
-        ["Mug'Zee"] = "mug-zee",
-        ["Chrome King Gallywix"] = "chrome-king-gallywix"
+        ["Plexus Sentinel"] = "plexus-sentinel",
+        ["Loom'ithar"] = "loomithar",
+        ["Soulbinder Naazindhri"] = "soulbinder-naazindhri",
+        ["Forgeweaver Araz"] = "forgeweaver-araz",
+        ["Adarus Duskblaze"] = "the-soul-hunters",
+        ["Velaryn Bloodwrath"] = "the-soul-hunters",
+        ["Ilyssa Darksorrow"] = "the-soul-hunters",
+        ["Fractillus"] = "fractillus",
+        ["Nexus-King Salhadaar"] = "nexus-king-salhadaar",
+        ["Dimensius"] = "dimensius-the-all-devouring"
     }
 
     local setupId = bossMap[bossName]
