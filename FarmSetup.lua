@@ -37,13 +37,7 @@ function GBI:ImportNote(boss)
     local bossSetup = GBRT.FarmSetup["bossSetups"][boss]
     local note = bossSetup.note
 
-    -- Updates MRT note - this works dont touch it
-    VMRT.Note.Text1 = note
-    if GMRT and GMRT.A and GMRT.A.Note and GMRT.A.Note.frame then
-        GMRT.A.Note.frame:Save()
-    else
-        print("MRT Note module not found or not loaded")
-    end
+    -- TODO implement how to import note into NSRT
 end
 
 function GBI:CreateBossSetup(boss)

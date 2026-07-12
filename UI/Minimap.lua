@@ -3,7 +3,7 @@ local _, GBI = ...
 local LDB = LibStub("LibDataBroker-1.1"):NewDataObject("MyAddon", {
     type = "data source",
     text = "MyAddon",
-    icon = "Interface\\AddOns\\GuldbyenRaidTools\\Media\\minimap.tga",  -- Replace with your icon path
+    icon = "Interface\\AddOns\\GuldbyenRaidTools\\Media\\minimap.tga",
     OnClick = function(self, button)
         if GBI.UI:IsShown() then
             GBI.UI:Hide()

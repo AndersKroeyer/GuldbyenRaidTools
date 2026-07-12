@@ -5,6 +5,12 @@ local function CreateIconComponent(parent, config)
 
     -- Set size
     iconButton:SetSize(config.width, config.height)
+    iconButton:EnableMouse(true)
+
+    if parent and parent.SetMovable then
+        parent:EnableMouse(true)
+        parent:SetMovable(true)
+    end
 
     -- Icon texture
     local icon = iconButton:CreateTexture(nil, "ARTWORK")
@@ -24,6 +30,18 @@ local function CreateIconComponent(parent, config)
         end)
     end
 
+    iconButton:SetScript("OnMouseDown", function(self, button)
+        if button == "LeftButton" and parent and parent.StartMoving and parent:IsMovable() then
+            parent:StartMoving()
+        end
+    end)
+
+    iconButton:SetScript("OnMouseUp", function(self, button)
+        if button == "LeftButton" and parent and parent.StopMovingOrSizing and parent:IsMovable() then
+            parent:StopMovingOrSizing()
+        end
+    end)
+
     -- Click handler
     if config.onClick then
         iconButton:SetScript("OnClick", config.onClick)
@@ -39,7 +57,7 @@ function GBI.Components:CreateIcon(panel, config)
         width = config.width or 32,
         height = config.height or 32,
         texture = config.texture or "Interface\\Icons\\INV_Misc_QuestionMark",
-        tooltip = config.tooltip or "Close",
+        tooltip = config.tooltip or nil,
         onClick = config.onClick
     })
     panel:AddComponent(icon, config.point, config.relativePoint, config.offsetX, config.offsetY)

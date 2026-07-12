@@ -86,6 +86,10 @@ function GBI.Components:CreateSettingCheckbox(panel, config)
         checked = GBRT.Settings[config.settingKey],
         onClick = function(self, checked)
             GBRT.Settings[config.settingKey] = checked
+
+            if config.onChange then
+                config.onChange(checked)
+            end
         end,
         offsetX = config.offsetX,
         offsetY = config.offsetY,

@@ -1,6 +1,6 @@
-## Interface: 110200
+## Interface: 120007, 120100
 ## Title: Guldbyen Raid Tools
-## Version: 0.0.1
+## Version: 0.0.2
 ## Author: Spillefeber, Jadefists, Fromeren
 ## SavedVariables: GBRT
 ## OptionalDeps: LibStub LibDataBroker-1.1 LibDBIcon-1.0
@@ -9,11 +9,13 @@ Utils.lua
 ReadyCheck.lua
 GBRTChecker.lua
 FarmSetup.lua
+Settings.lua
 EventHandler.lua
 
 # Main UI
 UI/Main.lua
 UI/Minimap.lua
+UI/GroupStatusList.lua
 
 # Component registration
 UI/Components/Button.lua

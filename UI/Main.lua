@@ -22,19 +22,21 @@ end
 
 function GBI.UI:InitializeUI()
     GBI.UI:InitializeMinimap()
+    GBI.UI:InitializeGroupStatusList()
 
-    local panel = GBI.Components:CreatePanel(UIParent, {
+    -- Main settings panel --
+    local mainSettingsPanel = GBI.Components:CreatePanel(UIParent, {
         name = "GBRTMainPanel",
         width = 500,
         height = 400,
         title = "Guldbyen Raid Tools",
         draggable = true
     })
-    panel:SetPoint("CENTER")
-    panel:Hide()
-    GBI.UI.MainPanel = panel
+    mainSettingsPanel:SetPoint("CENTER")
+    mainSettingsPanel:Hide()
+    GBI.UI.MainPanel = mainSettingsPanel
 
-    GBI.Components:CreateIcon(panel, {
+    GBI.Components:CreateIcon(mainSettingsPanel, {
         name = "CloseIcon",
         offsetX = 0,
         offsetY = 0,
@@ -47,7 +49,7 @@ function GBI.UI:InitializeUI()
         end
     })
 
-    GBI.Components:CreateSettingCheckbox(panel, {
+    GBI.Components:CreateSettingCheckbox(mainSettingsPanel, {
         name = "AutoReadyCheckbox",
         text = "Ready on ressurection",
         settingKey = "AutoReadyCheck",
@@ -57,7 +59,7 @@ function GBI.UI:InitializeUI()
         relativePoint = "TOPLEFT"
     })
 
-    GBI.Components:CreateSettingCheckbox(panel, {
+    GBI.Components:CreateSettingCheckbox(mainSettingsPanel, {
         name = "ReadyCheckCheckbox",
         text = "GBRT Ready Check",
         settingKey = "ReadyCheck",
@@ -65,6 +67,21 @@ function GBI.UI:InitializeUI()
         offsetY = -80,
         point = "TOPLEFT",
         relativePoint = "TOPLEFT"
+    })
+
+    GBI.Components:CreateSettingCheckbox(mainSettingsPanel, {
+        name = "OnScreenButton",
+        text = "Display on-screen button",
+        settingKey = "OnScreenButton",
+        offsetX = 20,
+        offsetY = -120,
+        point = "TOPLEFT",
+        relativePoint = "TOPLEFT",
+        onChange = function(checked)
+            if GBI.UI.OnScreenButton then
+                GBI.UI.OnScreenButton:ToggleVisibility(checked)
+            end
+        end
     })
 
     -- Dropdown for boss selection
@@ -78,7 +95,7 @@ function GBI.UI:InitializeUI()
         { text = "Nexus King",      value = "nexus-king-salhadaar" },
         { text = "Dimy",            value = "dimensius-the-all-devouring" }
     }
-    GBI.Components:CreateDropdown(panel, {
+    GBI.Components:CreateDropdown(mainSettingsPanel, {
         name = "BossPicker",
         options = dropdownOptions,
         selectedValue = GBRT.Settings["SelectedBoss"],
@@ -92,7 +109,7 @@ function GBI.UI:InitializeUI()
     })
 
     -- Update MRT note and raid groups button
-    GBI.Components:CreateButton(panel, {
+    GBI.Components:CreateButton(mainSettingsPanel, {
         name = "FetchButton",
         text = "Update setup",
         onClick = function()

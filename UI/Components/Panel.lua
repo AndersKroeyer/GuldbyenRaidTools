@@ -66,7 +66,25 @@ function GBI.Components:CreatePanel(parent, config)
     function panel:AddComponent(component, point, relativePoint, x, y)
         table.insert(self.components, component)
         component:SetParent(self)
-        component:SetPoint(point or "TOPLEFT", self, relativePoint or "TOPLEFT", x or 10, y or -30)
+
+        if point == nil then
+            point = "TOPLEFT"
+        end
+
+        if relativePoint == nil then
+            relativePoint = "TOPLEFT"
+        end
+
+        if x == nil then
+            x = 10
+        end
+
+        if y == nil then
+            y = -30
+        end
+
+        component:ClearAllPoints()
+        component:SetPoint(point, self, relativePoint, x, y)
         return component
     end
 
@@ -87,6 +105,18 @@ function GBI.Components:CreatePanel(parent, config)
             component:SetParent(nil)
         end
         self.components = {}
+    end
+
+    function panel:ToggleVisibility(show)
+        if show == nil then
+            show = not self:IsShown()
+        end
+
+        if show then
+            self:Show()
+        else
+            self:Hide()
+        end
     end
 
     panel.title = title
