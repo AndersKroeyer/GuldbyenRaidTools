@@ -89,9 +89,6 @@ function GBI.UI:RefreshGroupStatusList(refreshing)
             finishRefresh()
         end)
 
-        C_Timer.After(3, function()
-            finishRefresh()
-        end)
         return
     end
 
