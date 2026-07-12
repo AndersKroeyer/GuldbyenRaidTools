@@ -55,10 +55,18 @@ function GBI.Components:CreatePanel(parent, config)
 
         -- Set up drag handlers
         panel:SetScript("OnDragStart", function(self)
+            if not self:IsMovable() then
+                return
+            end
+
             self:StartMoving()
         end)
 
         panel:SetScript("OnDragStop", function(self)
+            if not self:IsMovable() then
+                return
+            end
+
             self:StopMovingOrSizing()
         end)
     end

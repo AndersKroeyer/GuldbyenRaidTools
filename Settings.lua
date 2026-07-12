@@ -6,6 +6,12 @@ GBI.Settings.Defaults = {
     SelectedBoss = "",
     ReadyCheck = false,
     OnScreenButton = false,
+    OnScreenButtonPosition = {
+        point = "CENTER",
+        relativePoint = "CENTER",
+        xOfs = 0,
+        yOfs = 0,
+    },
 }
 
 function GBI:InitializeSettings()
